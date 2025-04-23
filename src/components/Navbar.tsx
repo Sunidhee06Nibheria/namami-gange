@@ -1,14 +1,33 @@
 
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Menu, X } from "lucide-react"
 import { Button } from "./ui/button"
 import { cn } from "@/lib/utils"
+import { AuthDialog } from "./AuthDialog"
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [authOpen, setAuthOpen] = useState(false)
+  const [user, setUser] = useState<{ email: string } | null>(null)
+
+  // Load user from localStorage on mount
+  useEffect(() => {
+    const data = localStorage.getItem("ng-user")
+    if (data) {
+      try {
+        setUser(JSON.parse(data))
+      } catch {}
+    }
+  }, [])
+
+  // On login, save user
+  const handleSignInSuccess = (u: { email: string }) => {
+    setUser(u)
+    localStorage.setItem("ng-user", JSON.stringify(u))
+  }
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -19,6 +38,7 @@ export function Navbar() {
   ]
 
   return (
+    <>
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-sm">
       <div className="container flex h-16 items-center">
         <Link to="/" className="flex items-center space-x-2">
@@ -45,7 +65,24 @@ export function Navbar() {
         </nav>
         
         <div className="flex flex-1 justify-end space-x-4">
-          <Button variant="outline" className="hidden md:flex">Sign In</Button>
+          {/* Auth Button */}
+          {!user ? (
+            <Button
+              variant="outline"
+              className="hidden md:flex"
+              onClick={() => setAuthOpen(true)}
+            >
+              Sign In
+            </Button>
+          ) : (
+            <Button
+              variant="secondary"
+              className="hidden md:flex border-blue-500 text-blue-600"
+              disabled
+            >
+              {user.email}
+            </Button>
+          )}
           <Button className="hidden md:flex bg-river-500 hover:bg-river-600">Monitor Now</Button>
           
           <Button 
@@ -78,7 +115,19 @@ export function Navbar() {
               </li>
             ))}
             <li className="pt-4">
-              <Button variant="outline" className="w-full">Sign In</Button>
+              {!user ? (
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => setAuthOpen(true)}
+                >
+                  Sign In
+                </Button>
+              ) : (
+                <Button disabled variant="secondary" className="w-full border-blue-500 text-blue-600">
+                  {user.email}
+                </Button>
+              )}
             </li>
             <li className="pt-2">
               <Button className="w-full bg-river-500 hover:bg-river-600">Monitor Now</Button>
@@ -87,5 +136,14 @@ export function Navbar() {
         </nav>
       </div>
     </header>
+    {/* Auth Dialog */}
+    <AuthDialog
+      open={authOpen}
+      onOpenChange={setAuthOpen}
+      onSignInSuccess={handleSignInSuccess}
+      isSignedIn={!!user}
+    />
+    </>
   )
 }
+
