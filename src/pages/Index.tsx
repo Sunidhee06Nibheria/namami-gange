@@ -23,27 +23,34 @@ export default function Index() {
       
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        {/* Background with water effect */}
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&q=80')] bg-cover bg-center">
-          <div className="absolute inset-0 hero-gradient" />
+        {/* Ocean/cloud background image with overlay */}
+        <div className="absolute inset-0">
+          <img
+            src="/lovable-uploads/10a89adf-6522-49a0-8af5-cafc45d9111f.png"
+            alt="Ocean/Cloud Sky"
+            className="w-full h-full object-cover object-center"
+            style={{ minHeight: "100%", minWidth: "100%" }}
+          />
+          {/* Overlay for contrast */}
+          <div className="absolute inset-0 bg-black/40" />
         </div>
         
         <div className="container relative px-4 py-20 md:py-28 lg:py-32">
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="max-w-3xl mx-auto text-center text-white">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
               <span className="block">Namami Gange</span>
-              <span className="block mt-2 text-river-600">
+              <span className="block mt-2 text-river-100">
                 AI-Powered Water Quality Monitoring
               </span>
             </h1>
-            <p className="mt-6 text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">
+            <p className="mt-6 text-lg md:text-xl max-w-2xl mx-auto text-white/90">
               Safeguarding the Ganga, One Data Point at a Time.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" asChild className="bg-river-500 hover:bg-river-600">
+              <Button size="lg" asChild className="bg-river-500 hover:bg-river-600 text-white">
                 <Link to="/dashboard">Monitor Now</Link>
               </Button>
-              <Button size="lg" variant="outline" asChild>
+              <Button size="lg" variant="outline" asChild className="bg-white text-river-600 border-white hover:bg-river-100">
                 <Link to="/about">Learn More</Link>
               </Button>
             </div>
