@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
@@ -26,8 +25,8 @@ export default function Index() {
         {/* Ocean/cloud background image with overlay */}
         <div className="absolute inset-0">
           <img
-            src="/lovable-uploads/10a89adf-6522-49a0-8af5-cafc45d9111f.png"
-            alt="Ocean/Cloud Sky"
+            src="/lovable-uploads/c00134d7-6240-46db-9571-025889651905.png"
+            alt="Ocean and Clouds"
             className="w-full h-full object-cover object-center"
             style={{ minHeight: "100%", minWidth: "100%" }}
           />
