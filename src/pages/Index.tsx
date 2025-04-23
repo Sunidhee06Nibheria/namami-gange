@@ -37,7 +37,7 @@ export default function Index() {
         <div className="container relative px-4 py-20 md:py-28 lg:py-32">
           <div className="max-w-3xl mx-auto text-center text-white">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-              <span className="block">Namami Gange</span>
+              <span className="block text-[#00008B]">Namami Gange</span>
               <span className="block mt-2 text-river-100">
                 AI-Powered Water Quality Monitoring
               </span>
