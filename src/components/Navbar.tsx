@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState, useEffect } from "react"
@@ -13,7 +12,6 @@ export function Navbar() {
   const [authOpen, setAuthOpen] = useState(false)
   const [user, setUser] = useState<{ email: string } | null>(null)
 
-  // Load user from localStorage on mount
   useEffect(() => {
     const data = localStorage.getItem("ng-user")
     if (data) {
@@ -23,7 +21,6 @@ export function Navbar() {
     }
   }, [])
 
-  // On login, save user
   const handleSignInSuccess = (u: { email: string }) => {
     setUser(u)
     localStorage.setItem("ng-user", JSON.stringify(u))
@@ -42,8 +39,12 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-sm">
       <div className="container flex h-16 items-center">
         <Link to="/" className="flex items-center space-x-2">
-          <div className="relative h-8 w-8 overflow-hidden rounded-full bg-gradient-to-br from-river-400 to-river-600">
-            <div className="absolute inset-0 opacity-60 water-wave"></div>
+          <div className="relative h-8 w-8 overflow-hidden rounded-full">
+            <img 
+              src="/lovable-uploads/218f33df-d96c-4cec-af0f-135641cdc170.png" 
+              alt="Namami Gange Logo" 
+              className="h-full w-full object-cover"
+            />
           </div>
           <span className="hidden font-bold sm:inline-block">Namami Gange</span>
         </Link>
@@ -65,7 +66,6 @@ export function Navbar() {
         </nav>
         
         <div className="flex flex-1 justify-end space-x-4">
-          {/* Auth Button */}
           {!user ? (
             <Button
               variant="outline"
@@ -96,7 +96,6 @@ export function Navbar() {
         </div>
       </div>
       
-      {/* Mobile menu */}
       <div className={cn(
         "fixed inset-0 top-16 z-40 bg-background md:hidden transition-transform duration-300 ease-in-out",
         isMenuOpen ? "translate-x-0" : "translate-x-full"
@@ -136,7 +135,6 @@ export function Navbar() {
         </nav>
       </div>
     </header>
-    {/* Auth Dialog */}
     <AuthDialog
       open={authOpen}
       onOpenChange={setAuthOpen}
@@ -146,4 +144,3 @@ export function Navbar() {
     </>
   )
 }
-
